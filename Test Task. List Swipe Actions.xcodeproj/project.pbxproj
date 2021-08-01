@@ -66,10 +66,10 @@
 		3436147B26B54E4B00774A11 /* Test Task. List Swipe Actions */ = {
 			isa = PBXGroup;
 			children = (
-				34D6EBE426B69E5100B4FF69 /* CustomizedList */,
-				34D6EBE326B69E4100B4FF69 /* ClassicList */,
 				3436147C26B54E4B00774A11 /* Test_Task__List_Swipe_ActionsApp.swift */,
 				3436148B26B6435700774A11 /* AppTabView.swift */,
+				34D6EBE426B69E5100B4FF69 /* CustomizedList */,
+				34D6EBE326B69E4100B4FF69 /* ClassicList */,
 				3436148026B54E4C00774A11 /* Assets.xcassets */,
 				3436148526B54E4C00774A11 /* Info.plist */,
 				3436148226B54E4C00774A11 /* Preview Content */,

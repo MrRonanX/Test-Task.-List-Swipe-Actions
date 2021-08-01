@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CellView: View {
     @EnvironmentObject var viewModel: CustomizedListViewModel
+    
     var content: CellModel
     var width: CGFloat
     var buttonType: SwipeButtonType

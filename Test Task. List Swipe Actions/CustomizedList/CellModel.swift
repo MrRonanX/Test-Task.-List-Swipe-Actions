@@ -14,6 +14,6 @@ struct CellModel: Identifiable {
     var reachedThreshold = false
     var isPinned = false
     var isMarked = false
-    var sortingNumber = 0
-    var buttonNumber = Int.random(in: 0...2)
+    let sortingNumber = 0
+    let buttonNumber = Int.random(in: 0...2)
 }

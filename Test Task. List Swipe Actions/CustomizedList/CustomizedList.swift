@@ -16,7 +16,9 @@ struct CustomizedList: View {
                 GeometryReader { geo in
                     LazyVStack(alignment: .leading, spacing: 0) {
                         ForEach(viewModel.data) { content in
-                            CellView(content: content, width: geo.size.width, buttonType: viewModel.allButtonTypes[content.buttonNumber])
+                            CellView(content: content,
+                                     width: geo.size.width,
+                                     buttonType: viewModel.allButtonTypes[content.buttonNumber])
                                 .environmentObject(viewModel)
                         }
                         

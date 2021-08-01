@@ -12,6 +12,53 @@ final class CustomizedListViewModel: ObservableObject {
     var allButtonTypes = SwipeButtonType.allCases
     
     
+    func buttonAction(of buttonType: SwipeButtonType, with content: CellModel) {
+        switch buttonType {
+        case .delete:
+            deleteText(of: content)
+        case .pin:
+            pinText(of: content)
+        case .mark:
+            markText(of: content)
+        }
+    }
+    
+    func deleteText(of cell: CellModel) {
+        withAnimation {
+            let index = getIndex(of: cell.text)
+            data.remove(at: index)
+        }
+    }
+    
+    func markText(of cell: CellModel) {
+        withAnimation {
+            let index = getIndex(of: cell.text)
+            data[index].isMarked = true
+            data[index].offset = 0
+        }
+    }
+    
+    func pinText(of cell: CellModel) {
+        withAnimation {
+            let index = getIndex(of: cell.text)
+            var localItem = data[index]
+            localItem.isPinned.toggle()
+            localItem.offset = 0
+            data.remove(at: index)
+            data.insert(localItem, at: 0)
+            if cell.isPinned {
+                let localArray = data.filter { !$0.isPinned }.sorted { $0.sortingNumber < $1.sortingNumber }
+                data.removeAll { !$0.isPinned }
+                data.append(contentsOf: localArray)
+            }
+        }
+    }
+    
+    
+    func getIndex(of item: String) -> Int {
+        data.firstIndex(where: { $0.text == item }) ?? 0
+    }
+    
     func gestureAction(for content: CellModel, and cellWidth: CGFloat, actionType: SwipeButtonType) -> some Gesture {
         let index = getIndex(of: content.text)
         return DragGesture()
@@ -62,55 +109,5 @@ final class CustomizedListViewModel: ObservableObject {
                     }
                 }
             }
-    }
-    
-    func buttonAction(of buttonType: SwipeButtonType, with content: CellModel) {
-        switch buttonType {
-        case .delete:
-            deleteText(of: content)
-        case .pin:
-            pinText(of: content)
-        case .mark:
-            markText(of: content)
-        }
-    }
-    
-    func deleteText(of cell: CellModel) {
-        withAnimation {
-            let index = getIndex(of: cell.text)
-            data.remove(at: index)
-        }
-        
-    }
-    
-    func markText(of cell: CellModel) {
-        withAnimation {
-            let index = getIndex(of: cell.text)
-            data[index].isMarked = true
-            data[index].offset = 0
-        }
-       
-    }
-    
-    func pinText(of cell: CellModel) {
-        withAnimation {
-            let index = getIndex(of: cell.text)
-            var localItem = data[index]
-            localItem.isPinned.toggle()
-            localItem.offset = 0
-            data.remove(at: index)
-            data.insert(localItem, at: 0)
-            if cell.isPinned {
-                let localArray = data.filter { !$0.isPinned }.sorted { $0.sortingNumber < $1.sortingNumber }
-                data.removeAll { !$0.isPinned }
-                data.append(contentsOf: localArray)
-            }
-        }
-    }
-    
-    
-    
-    func getIndex(of item: String) -> Int {
-        data.firstIndex(where: { $0.text == item }) ?? 0
     }
 }
