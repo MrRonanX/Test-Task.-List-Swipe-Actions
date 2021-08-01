@@ -25,7 +25,6 @@ struct CellView: View {
             
             HStack {
                 Text(content.text)
-                    .padding(.leading)
                 Spacer()
                 if content.isPinned {
                     Image(systemName: "pin.fill")
