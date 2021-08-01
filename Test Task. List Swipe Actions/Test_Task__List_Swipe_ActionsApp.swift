@@ -11,7 +11,7 @@ import SwiftUI
 struct Test_Task__List_Swipe_ActionsApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppTabView()
         }
     }
 }
