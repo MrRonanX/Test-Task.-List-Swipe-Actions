@@ -12,18 +12,9 @@ struct BackgroundColor: View {
     var buttonType: SwipeButtonType
     var size: CGFloat
     var body: some View {
-        backgroundColor
+        HStack {
+        buttonType.backgroundColor
                 .frame(width: size)
-    }
-    
-    var backgroundColor: Color {
-        switch buttonType {
-        case .delete:
-            return Color.red
-        case .pin:
-            return Color.yellow
-        case .mark:
-            return Color.green
         }
     }
 }

@@ -14,15 +14,16 @@ struct CellView: View {
     var width: CGFloat
     var buttonType: SwipeButtonType
     
+    
+    
     var body: some View {
         ZStack {
-            HStack {
-                BackgroundColor(buttonType: buttonType, size: width)
-            }
-            HStack {
-                SwipeButton(buttonType: buttonType) { viewModel.buttonAction(of: buttonType, with: content) }
-            }
+            BackgroundColor(buttonType: buttonType, size: width)
             
+            SwipeButton(buttonType: buttonType, alignment: .left) { viewModel.buttonAction(of: buttonType, with: content) }
+
+            SwipeButton(buttonType: buttonType, alignment: .right) { viewModel.buttonAction(of: buttonType, with: content) }
+
             HStack {
                 Text(content.text)
                 Spacer()

@@ -7,10 +7,15 @@
 
 import SwiftUI
 
+enum CurrentPosition {
+    case initial, leftThresholdReached, rightThresholdReached
+}
+
 struct CellModel: Identifiable {
     let id = UUID()
     let text: String
     var offset: CGFloat = 0
+    var cellPosition: CurrentPosition = .initial
     var reachedThreshold = false
     var isPinned = false
     var isMarked = false

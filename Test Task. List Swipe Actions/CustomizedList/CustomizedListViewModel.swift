@@ -64,17 +64,34 @@ final class CustomizedListViewModel: ObservableObject {
         return DragGesture()
             .onChanged { [self] value in
                 withAnimation {
-                    if data[index].reachedThreshold {
-                        if value.translation.width < 0 {
-                            data[index].offset = value.translation.width - 90
+                    switch content.cellPosition {
+                    case .initial:
+                        if value.translation.width < 0 || value.translation.width <= 90 {
+                            data[index].offset = value.translation.width
+                            
+                        } else if value.translation.width > 90 {
+                            data[index].offset = 90
+                            
+                        } else {
+                            data[index].offset = 0
+                        }
+                    case .leftThresholdReached:
+                        
+                        if value.translation.width > 0 {
+                            data[index].offset = 90
+                            
+                        } else if value.translation.width > -90 {
+                            data[index].offset = value.translation.width
                     
                         } else {
                             data[index].offset = 0
                         }
-                    } else {
+                    
+                    case .rightThresholdReached:
+                        print("🎃 Right Threshold ")
                         if value.translation.width < 0 {
-
-                            data[index].offset = value.translation.width
+                            data[index].offset = value.translation.width - 90
+                    
                         } else {
                             data[index].offset = 0
                         }
@@ -83,28 +100,48 @@ final class CustomizedListViewModel: ObservableObject {
             }
             .onEnded { [self] value in
                 withAnimation {
-                    if data[index].reachedThreshold {
-                        if value.translation.width >= 10 {
-                            data[index].offset = 0
-                            data[index].reachedThreshold = false
-                        } else if value.translation.width <= -cellWidth * 0.65 {
-                            data[index].offset = -500
-                            buttonAction(of: actionType, with: content)
-                        } else {
-                            data[index].offset = -90
-                        }
-                    } else {
-                        
-                        if value.translation.width <= -cellWidth * 0.65 {
+                    switch content.cellPosition {
+                    case .initial:
+                        if value.translation.width <= -cellWidth * 0.7 {
                             data[index].offset = -500
                             buttonAction(of: actionType, with: content)
                             
-                        } else if value.translation.width > -cellWidth * 0.65 && value.translation.width < 0 {
+                        } else if value.translation.width > -cellWidth * 0.7 && value.translation.width < 0 {
                             data[index].offset = -90
-                            data[index].reachedThreshold = true
+                            data[index].cellPosition = .rightThresholdReached
+                            
+                        } else if value.translation.width > 0 {
+                            data[index].offset = 90
+                            data[index].cellPosition = .leftThresholdReached
+                        
+                        } else if value.translation.width > -90 {
+                            data[index].offset = 0
+                            
                         } else {
                             data[index].offset = 0
-                            data[index].reachedThreshold = false
+                        }
+
+                    case .leftThresholdReached:
+                        if value.translation.width <= -10 {
+                            data[index].offset = 0
+                            data[index].cellPosition = .initial
+                            
+                        } else {
+                            data[index].offset = 90
+                        }
+                        
+                    case .rightThresholdReached:
+                        
+                        if value.translation.width >= 10 {
+                            data[index].offset = 0
+                            data[index].cellPosition = .initial
+                            
+                        } else if value.translation.width <= -cellWidth * 0.7 {
+                            data[index].offset = -500
+                            buttonAction(of: actionType, with: content)
+                            
+                        } else {
+                            data[index].offset = -90
                         }
                     }
                 }
