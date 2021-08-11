@@ -17,8 +17,6 @@ struct CellView: View {
     var secondaryAction: () -> Void
     var primaryAction: () -> Void
     
-    
-    
     var body: some View {
         ZStack {
             BackgroundColor(buttonType: primaryButtonType, size: size.width)
