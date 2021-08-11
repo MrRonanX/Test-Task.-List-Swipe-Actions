@@ -38,12 +38,11 @@ struct SwipeButton: View {
     var swipeButton: some View {
         Button(action: buttonAction) {
             Image(systemName: image)
-                .font(.title)
+                .font(.title2)
                 .foregroundColor(.white)
         }
         .frame(width: 90)
         .contentShape(Rectangle())
-        
     }
     
     

@@ -42,7 +42,8 @@ struct CellView: View {
                         .padding(.trailing)
                 }
             }
-            .padding()
+            .padding(11.85)
+            .padding(.leading, 8)
             .background(Color.white)
             .offset(x: content.offset)
             .gesture(viewModel.gestureAction(for: content, and: size.width) )
@@ -56,6 +57,8 @@ struct CellView: View {
             Spacer()
             Divider()
         }
+        .padding(.leading, 16)
+        .padding(.bottom, 0.4)
     }
 }
 

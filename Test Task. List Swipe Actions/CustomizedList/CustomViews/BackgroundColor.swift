@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct BackgroundColor: View {
-
+    
     var buttonType: SwipeButtonType
     var size: CGFloat
+    
     var body: some View {
         HStack {
-        buttonType.backgroundColor
+            buttonType.backgroundColor
                 .frame(width: size)
         }
     }

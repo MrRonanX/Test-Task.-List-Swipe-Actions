@@ -51,15 +51,17 @@ final class CustomizedListViewModel: ObservableObject {
     }
     
     
-    func setOffsetToZero(for cell: CellModel) {
+    func setOffsetToZero(with cell: CellModel) {
         guard newCellActivated else { return }
         newCellActivated = false
-            for index in data.indices {
-                if data[index].id.uuidString != cell.id.uuidString {
+        for index in data.indices {
+            if data[index].id.uuidString != cell.id.uuidString {
+                withAnimation(.easeIn) {
                     data[index].offset = 0
                     data[index].cellPosition = .initial
                 }
             }
+        }
     }
     
     
@@ -67,43 +69,42 @@ final class CustomizedListViewModel: ObservableObject {
         let index = getIndex(of: content.text)
         return DragGesture()
             .onChanged { [self] value in
-                    switch content.cellPosition {
-                    case .initial:
-                        setOffsetToZero(for: content)
-                        
-                        if value.translation.width < 0 {
-                            data[index].offset = value.translation.width
-
-                        } else if value.translation.width <= 90 {
-                            withAnimation(.linear) { data[index].offset = value.translation.width }
-                            
-                        } else if value.translation.width > 90 {
-                            data[index].offset = 90
-                            
-                        } else {
-                            withAnimation(.linear) { data[index].offset = 0 }
-                        }
-                        
-                    case .leftThresholdReached:
-                        if value.translation.width > 0 {
-                            data[index].offset = 90
-                            
-                        } else if value.translation.width > -90 {
-                            withAnimation(.linear) { data[index].offset = value.translation.width }
+                switch content.cellPosition {
+                case .initial:
+                    setOffsetToZero(with: content)
                     
-                        } else {
-                            withAnimation(.linear) { data[index].offset = 0 }
-                        }
-                    
-                    case .rightThresholdReached:
-                        if value.translation.width < 0 {
-                            withAnimation(.linear) { data[index].offset = value.translation.width - 90 }
-                            
-                        } else {
-                            withAnimation { data[index].offset = 0 }
-                        }
+                    if value.translation.width < 0 {
+                        data[index].offset = value.translation.width
+                        
+                    } else if value.translation.width <= 90 {
+                        withAnimation(.linear) { data[index].offset = value.translation.width }
+                        
+                    } else if value.translation.width > 90 {
+                        data[index].offset = 90
+                        
+                    } else {
+                        withAnimation(.linear) { data[index].offset = 0 }
                     }
-                
+                    
+                case .leftThresholdReached:
+                    if value.translation.width > 0 {
+                        data[index].offset = 90
+                        
+                    } else if value.translation.width > -90 {
+                        withAnimation(.linear) { data[index].offset = value.translation.width }
+                        
+                    } else {
+                        withAnimation(.linear) { data[index].offset = 0 }
+                    }
+                    
+                case .rightThresholdReached:
+                    if value.translation.width < 0 {
+                        withAnimation(.linear) { data[index].offset = value.translation.width - 90 }
+                        
+                    } else {
+                        withAnimation { data[index].offset = 0 }
+                    }
+                }
             }
             .onEnded { [self] value in
                 withAnimation(.easeIn) {
@@ -112,24 +113,24 @@ final class CustomizedListViewModel: ObservableObject {
                         if value.translation.width <= -cellWidth * 0.7 {
                             data[index].offset = -500
                             primaryButtonAction(of: content)
-
+                            
                         } else if value.translation.width > -cellWidth * 0.7 && value.translation.width < 0 {
                             data[index].offset = -90
                             data[index].cellPosition = .rightThresholdReached
                             newCellActivated = true
-
+                            
                         } else if value.translation.width > 0 {
-                                data[index].offset = 90
-                                data[index].cellPosition = .leftThresholdReached
-                                newCellActivated = true
+                            data[index].offset = 90
+                            data[index].cellPosition = .leftThresholdReached
+                            newCellActivated = true
                             
                         } else if value.translation.width > -90 {
                             data[index].offset = 0
-
+                            
                         } else {
                             data[index].offset = 0
                         }
-
+                        
                     case .leftThresholdReached:
                         if value.translation.width <= -10 {
                             data[index].offset = 0
