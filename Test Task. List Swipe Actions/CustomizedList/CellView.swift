@@ -11,19 +11,23 @@ struct CellView: View {
     @EnvironmentObject var viewModel: CustomizedListViewModel
     
     var content: CellModel
-    var width: CGFloat
-    var buttonType: SwipeButtonType
+    var size: CGSize
+    var secondaryButtonType: SwipeButtonType
+    var primaryButtonType: SwipeButtonType
+    var secondaryAction: () -> Void
+    var primaryAction: () -> Void
     
     
     
     var body: some View {
         ZStack {
-            BackgroundColor(buttonType: buttonType, size: width)
+            BackgroundColor(buttonType: primaryButtonType, size: size.width)
             
-            SwipeButton(buttonType: buttonType, alignment: .left) { viewModel.buttonAction(of: buttonType, with: content) }
-
-            SwipeButton(buttonType: buttonType, alignment: .right) { viewModel.buttonAction(of: buttonType, with: content) }
-
+            SecondaryButton(buttonType: secondaryButtonType, buttonAction: secondaryAction)
+                .opacity(content.offset <= -90  ? 0 : 1 )
+            
+            SwipeButton(buttonType: primaryButtonType, alignment: .right, action: primaryAction)
+            
             HStack {
                 Text(content.text)
                 Spacer()
@@ -40,13 +44,12 @@ struct CellView: View {
             }
             .padding()
             .background(Color.white)
-            .contentShape(Rectangle())
             .offset(x: content.offset)
-            .gesture(viewModel.gestureAction(for: content, and: width, actionType: buttonType) )
-            
+            .gesture(viewModel.gestureAction(for: content, and: size.width) )
         }
         .overlay(dividerLine)
     }
+    
     
     var dividerLine: some View {
         VStack {
@@ -58,7 +61,14 @@ struct CellView: View {
 
 struct CellView_Previews: PreviewProvider {
     static var previews: some View {
-        CellView(content: CellModel(text: "1"), width: UIScreen.main.bounds.width, buttonType: .delete)
+        CellView(content: CellModel(text: "1"),
+                 size: UIScreen.main.bounds.size,
+                 secondaryButtonType: .pin,
+                 primaryButtonType: .delete,
+                 secondaryAction: { print("Secondary Action")},
+                 primaryAction: { print("Secondary Action")})
             .environmentObject(CustomizedListViewModel())
     }
 }
+
+

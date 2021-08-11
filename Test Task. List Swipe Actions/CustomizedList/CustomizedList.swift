@@ -17,18 +17,18 @@ struct CustomizedList: View {
                     LazyVStack(alignment: .leading, spacing: 0) {
                         ForEach(viewModel.data) { content in
                             CellView(content: content,
-                                     width: geo.size.width,
-                                     buttonType: viewModel.allButtonTypes[content.buttonNumber])
+                                     size: geo.size,
+                                     secondaryButtonType: .pin,
+                                     primaryButtonType: .delete,
+                                     secondaryAction: { viewModel.pinText(of: content) },
+                                     primaryAction: { viewModel.primaryButtonAction(of:content) } )
                                 .environmentObject(viewModel)
                         }
-                        
                     }
                 }
             }
             .navigationTitle("Action List")
             .navigationBarTitleDisplayMode(.inline)
-            
-            
         }
     }
 }

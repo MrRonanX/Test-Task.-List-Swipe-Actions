@@ -7,35 +7,16 @@
 
 import SwiftUI
 
-enum SwipeButtonType: CaseIterable {
-    case delete, pin, mark
-    
-}
-
-extension SwipeButtonType {
-    
-    var backgroundColor: Color {
-        switch self {
-        case .delete:
-            return Color.red
-        case .pin:
-            return Color.yellow
-        case .mark:
-            return Color.green
-        }
-    }
-}
-
-
 enum ButtonAlignment {
     case left, right
 }
+
 struct SwipeButton: View {
     
     var buttonType: SwipeButtonType
     var alignment: ButtonAlignment
     var action: (() -> Void)? = nil
-   
+    
     var body: some View {
         HStack {
             if alignment == .right {
@@ -48,6 +29,7 @@ struct SwipeButton: View {
         }
     }
     
+    
     func buttonAction() {
         action?()
     }
@@ -55,11 +37,13 @@ struct SwipeButton: View {
     
     var swipeButton: some View {
         Button(action: buttonAction) {
-                Image(systemName: image)
-                    .font(.title)
-                    .foregroundColor(.white)
-            }
-            .frame(width: 90)
+            Image(systemName: image)
+                .font(.title)
+                .foregroundColor(.white)
+        }
+        .frame(width: 90)
+        .contentShape(Rectangle())
+        
     }
     
     

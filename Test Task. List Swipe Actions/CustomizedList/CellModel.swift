@@ -16,9 +16,7 @@ struct CellModel: Identifiable {
     let text: String
     var offset: CGFloat = 0
     var cellPosition: CurrentPosition = .initial
-    var reachedThreshold = false
     var isPinned = false
     var isMarked = false
     var sortingNumber = 0
-    let buttonNumber = Int.random(in: 0...2)
 }

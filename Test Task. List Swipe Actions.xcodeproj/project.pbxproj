@@ -13,6 +13,8 @@
 		3436148426B54E4C00774A11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3436148326B54E4C00774A11 /* Preview Assets.xcassets */; };
 		3436148C26B6435700774A11 /* AppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3436148B26B6435700774A11 /* AppTabView.swift */; };
 		3436148E26B643B400774A11 /* ClassicList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3436148D26B643B400774A11 /* ClassicList.swift */; };
+		346407EF26C3BAE600B8506A /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346407EE26C3BAE600B8506A /* SecondaryButton.swift */; };
+		346407F126C3BCB000B8506A /* SwipeButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346407F026C3BCB000B8506A /* SwipeButtonType.swift */; };
 		34D6EBE626B69E7300B4FF69 /* CustomizedListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D6EBE526B69E7300B4FF69 /* CustomizedListViewModel.swift */; };
 		34D6EBE826B69EB400B4FF69 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D6EBE726B69EB400B4FF69 /* CellView.swift */; };
 		34D6EBEB26B69F7600B4FF69 /* BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D6EBEA26B69F7600B4FF69 /* BackgroundColor.swift */; };
@@ -29,6 +31,8 @@
 		3436148526B54E4C00774A11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3436148B26B6435700774A11 /* AppTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabView.swift; sourceTree = "<group>"; };
 		3436148D26B643B400774A11 /* ClassicList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicList.swift; sourceTree = "<group>"; };
+		346407EE26C3BAE600B8506A /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
+		346407F026C3BCB000B8506A /* SwipeButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeButtonType.swift; sourceTree = "<group>"; };
 		34D6EBE526B69E7300B4FF69 /* CustomizedListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizedListViewModel.swift; sourceTree = "<group>"; };
 		34D6EBE726B69EB400B4FF69 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		34D6EBEA26B69F7600B4FF69 /* BackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColor.swift; sourceTree = "<group>"; };
@@ -101,6 +105,7 @@
 				3436147E26B54E4B00774A11 /* CustomizedList.swift */,
 				34D6EBE726B69EB400B4FF69 /* CellView.swift */,
 				34D6EBEE26B69FEA00B4FF69 /* CellModel.swift */,
+				346407F026C3BCB000B8506A /* SwipeButtonType.swift */,
 			);
 			path = CustomizedList;
 			sourceTree = "<group>";
@@ -110,6 +115,7 @@
 			children = (
 				34D6EBEC26B69FB800B4FF69 /* SwipeButton.swift */,
 				34D6EBEA26B69F7600B4FF69 /* BackgroundColor.swift */,
+				346407EE26C3BAE600B8506A /* SecondaryButton.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -183,6 +189,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				346407EF26C3BAE600B8506A /* SecondaryButton.swift in Sources */,
+				346407F126C3BCB000B8506A /* SwipeButtonType.swift in Sources */,
 				34D6EBED26B69FB800B4FF69 /* SwipeButton.swift in Sources */,
 				34D6EBE626B69E7300B4FF69 /* CustomizedListViewModel.swift in Sources */,
 				3436148C26B6435700774A11 /* AppTabView.swift in Sources */,
